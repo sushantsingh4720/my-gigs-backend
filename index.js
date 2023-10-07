@@ -18,21 +18,8 @@ connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
-// Allow requests from your Vercel frontend
-const allowedOrigins = [process.env.FRONTEND_URL];
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true, // Allow credentials (cookies)
-  })
-);
-// app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.get("/", (req, res) => {
   res.status(200).json({ success: true, message: "API is working" });
 });
