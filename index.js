@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/auth", authRoute);
 app.use("/api/gig", gigRoute);
-// app.use(authMiddleware);
+app.use(authMiddleware);
 app.use("/api/user", userRoute);
 app.use("/api/reviews", reviewRoute);
 app.use("/api/orders", orderRoute);
