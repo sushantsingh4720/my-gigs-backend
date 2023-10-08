@@ -40,11 +40,13 @@ export const login = async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
     const { password, ...info } = user._doc;
 
-    res
-      .cookie("accessToken", token, {
-        httpOnly: true,
-      })
-      .status(200)
+    res.cookie("accessToken", token, {
+      httpOnly: true,
+      domain: "mygigs.vercel.app", // Set the domain of your frontend
+      path: "/", // Set the path to match all routes
+      sameSite: "None", // Or "Lax" depending on your security requirements
+      secure: true, // Ensure it's sent only over HTTPS
+    }).status(200)
       .json({ success: true, message: "Login successfully", info });
   } catch (error) {
     // console.log(error);
