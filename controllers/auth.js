@@ -43,6 +43,8 @@ export const login = async (req, res) => {
     res
       .cookie("accessToken", token, {
         httpOnly: true,
+        sameSite: 'None',
+        secure: true, // if your site is served over HTTPS
       })
       .status(200)
       .json({ success: true, message: "Login successfully", info });
